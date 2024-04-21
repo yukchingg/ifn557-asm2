@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<main>
+    <section>
+        <div class="container-fluid" style="margin-top:30px">
+            <div class="row">
+                <div class="col-sm-6">
+                    <img class="card-img-top" src="{{ url_for('static', filename='img/'+jersey.image) }}" alt="Card image">
+                </div>
+                <div class="col-sm-6">
+                    <div class="mx-3">
+                        <h3>{{ jersey.name }}
+                            <span class="badge badge-danger">Hot</span></h3>
+                            <p class="card-text"> Jersey Number: {{ jersey.number }}</p>
+                        <h5 class="pt-4"> AUD ${{ jersey.price }}</h5>
+                        <p class="font-italic text-black-50 mt-n2" id="para1">
+                            Tax included. Shipping calculated at checkout.
+                        </p>
+
+                        <p class="description pt-3" >{{ jersey.description }}
+                        </p>
+
+
+                        <!-- Huge modal -->
+                        <form action="{{ url_for('main.order') }}">
+                            <input type="hidden" id="jersey_id" name="jersey_id" value="{{ jersey.id }}">
+                            <input id="DefaultButton" class="btn btn-primary" type="submit" value="Add to Basket">
+                        </form>  
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}

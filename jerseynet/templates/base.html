@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="My Jersey Ecommerce Shop">
+    <style>
+        body,
+        html {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        /* Topic style*/
+        * {
+            font-family: serif;
+        }
+
+        h1 {
+            text-align: center;
+            font-family: 'Courier New', Courier, monospace;
+            color: aliceblue;
+            background-color: black;
+        }
+
+        /* Removing black spot */
+        li {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Header style */
+        li a {
+            display: block;
+            color: #ffffff;
+            text-align: center;
+
+            text-decoration: none;
+        }
+
+        li a:hover:not(.active) {
+            color: #00e7fc;
+        }
+
+        .card-img-top {
+            position: relative;
+            width: 50%;
+        }
+
+        /* Default button style */
+
+        #DefaultButton {
+            background-color: black;
+            color: whitesmoke;
+            border: 2px solid #666666;
+            font-family: serif;
+        }
+
+        #DefaultButton:hover {
+            background-color: white;
+            color: black;
+            border: 2px solid #666666;
+        }
+
+        /* Style all font awesome icons */
+        .fa {
+            padding: 20px;
+            font-size: 30px;
+            width: 50px;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        /* Add a hover effect */
+        .fa:hover {
+            opacity: 0.7;
+        }
+
+        /* Facebook */
+        .fa-facebook {
+            background: #3B5998;
+            color: white;
+        }
+
+        /* Twitter */
+        .fa-twitter {
+            background: #55ACEE;
+            color: white;
+        }
+
+        /* Google */
+        .fa-google {
+            background: #dd4b39;
+            color: white;
+        }
+
+        /* Instagram */
+        .fa-instagram {
+            background: #ac2bac;
+            color: white;
+        }
+
+
+        @media (min-width: 768px) {
+            .jumbotron {
+                height: 700px;
+                /* Set the height for medium-sized screens and above */
+            }
+        }
+    </style>
+
+    <!-- Bootstrap Required Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>JerseyNet</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+
+<body>
+    <!-- putting header inside container will prevent full width navbar -->
+
+    <header>
+
+        <nav class="navbar navbar-expand-sm bg-dark navbar-transparent">
+            <!-- Brand/logo -->
+            <a href="{{url_for('main.index')}}" class="navbar-brand">
+                <img src="{{url_for('static', filename='img/jerseynetlogo.jpg')}}" class="img-fluid"
+                    alt="Responsive image" width="100">
+
+                <!-- Links -->
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link disable"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Sign up</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url_for('main.order')}}">My Basket</a>
+                    </li>
+                </ul>
+        </nav>
+
+
+        <!--navbar creates a navigation bar -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="{{url_for('main.index')}}">Home</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{url_for('main.index', _anchor='cities_anchor')}}">Teams <span
+                                class="sr-only">(current)</span></a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">On Sale!</a>
+                    </li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0" action="{{url_for('main.search')}}">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Enter Players"
+                        aria-label="Search" name="search">
+                    <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit"
+                        id="DefaultButton">Search</button>
+                </form>
+            </div>
+        </nav>
+
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <div class="alert alert-primary" role="alert">
+            {% for message in messages %}
+            {{ message }}
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% endwith %}
+
+        {% block head %}
+
+        {% endblock %}
+
+    </header>
+
+
+    <!-- main page content goes in container -->
+    <div class="container-fluid">
+        <main>
+            {% block main %}
+
+            {% endblock %}
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <!-- Add icon library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Footer of the website -->
+    <footer class="footer">
+        <div class="text-center py-2 bg-light">
+            <a href="#" class="fa fa-facebook"></a>
+            <a href="#" class="fa fa-twitter"></a>
+            <a href="#" class="fa fa-google"></a>
+            <a href="#" class="fa fa-instagram"></a>
+        </div>
+        <div class="text-center py-2 bg-secondary">
+            <span class="text-light">Copyright &copy; 2023</span>
+        </div>
+    </footer>
+    <!-- Footer -->
+
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>

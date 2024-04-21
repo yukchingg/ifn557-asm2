@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<!-- display jerseys for the specific team -->
+<section>
+
+    <div>
+        <div>
+            <h1 class="mb-4">Select a jersey from below</h1>
+        </div>
+    </div>
+
+    <div class="card-columns">
+        <!-- each jersey is a bootstrap card -->
+        {% for jersey in jerseys%}
+        <div class="card">
+            <img class="card-img-top" src="{{ url_for('static', filename='img/'+jersey.image) }}" alt="Card image">
+            <div class="card-body">
+                <h4 class="card-title">{{ jersey.name }}</h4>
+                <p class="card-text">AUD ${{ jersey.price }}</p>
+            </div>
+            <div class="card-footer d-flex justify-content-between">
+                <form action="{{ url_for('main.order') }}">
+                    <input type="hidden" id="jersey_id" name="jersey_id" value="{{ jersey.id }}">
+                    <input id="DefaultButton" class="btn btn-primary" type="submit" value="Add to Basket">
+                </form>  
+                <a href= "{{ url_for('main.itemdetails', jerseyid=jersey.id) }}" class="btn btn-primary" id="DefaultButton">View Detail</a>          
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    
+</section>
+{% endblock %}
+
